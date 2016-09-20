@@ -24,3 +24,18 @@ ggplot(subset(housing, STATE %in% c("MA","TX")),
            color = STATE)) +
   geom_point()
 
+# aes() - position, color, fill, shape, linetype, size
+
+# geom - points, lines, boxplot
+
+hp2001Q1 <- subset(housing, Date == "2001Q1")
+ggplot(hp2001Q1,
+       aes(y= homeValue, x = Home.Price.Index)) +
+  geom_point()
+
+HV_HPI <- lm(homeValue ~ Home.Price.Index, data = hp2001Q1)
+hp2001Q1$pred_price <- predict(HV_HPI)
+
+p1 <- ggplot(hp2001Q1, aes(x = Home.Price.Index, y = homeValue))
+
+p1 + geom_point(aes(color = "red"))
