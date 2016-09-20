@@ -31,7 +31,6 @@ ggplot(subset(housing, STATE %in% c("MA","TX")),
 # aes() - position, color, fill, shape, linetype, size
 
 # geom - points, lines, boxplot
-
 hp2001Q1 <- subset(housing, Date == "2001Q1")
 ggplot(hp2001Q1,
        aes(y= homeValue, x = Home.Price.Index)) +
@@ -48,6 +47,9 @@ p1 + geom_point(aes(color = "red")) +
 
 # add smooth line
 p1 + geom_point() + geom_smooth()
+
+# use geom(smooth(method = "lm")) 
+p1 + geom_point() + geom_smooth(method = "lm")
 
 # scatter plot but using text
 p1 + geom_text(aes(label = STATE), size = 3) + geom_line(aes(y=pred_price)) + geom_smooth()
@@ -68,9 +70,7 @@ housing_mut <- mutate(filter(housing,STATE %in% c("NY","CT","AL","CA")),
 p1 <- ggplot(housing_mut, aes(x= Date, y= homeValue))
 p1+geom_point(aes(color = region, shape = STATE))
 
-
 # statistics
 # histogram
 p2 <- ggplot(housing, aes(x= log(homeValue)))
-             
 p2 + geom_histogram(binwidth = 0.05)
