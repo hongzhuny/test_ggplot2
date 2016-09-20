@@ -10,7 +10,8 @@ library(ggrepel)
 # read from online source - xls file 
 install.packages("gdata")
 require(gdata)
-housing <- read.xls('http://datatoolkits.lincolninst.edu/subcenters/land-values/data/landdata-states-2016q1.xls')
+housing <- read.xls('http://datatoolkits.lincolninst.edu/subcenters/land-values/data/landdata-states-2016q1.xls'
+                    , skip = 1)
 
 housing$homeValue <- str_sub(housing$Home.Value, 2, length(housing$Home.Value))
 housing$homeValue <- as.numeric(gsub(",", "", housing$homeValue))
