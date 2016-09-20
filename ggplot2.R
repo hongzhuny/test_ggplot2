@@ -47,3 +47,9 @@ p1 + geom_point() + geom_smooth()
 
 # scatter plot but using text
 p1 + geom_text(aes(label = STATE), size = 3) + geom_line(aes(y=pred_price)) + geom_smooth()
+
+# use both dot and label - ggrepel
+install.packages("ggrepel")
+library(ggrepel)
+p1 + geom_point() +
+  geom_text_repel(aes(label = STATE))
