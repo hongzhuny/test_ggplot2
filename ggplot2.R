@@ -65,8 +65,12 @@ p1 + geom_point(aes(color = STATE))
 housing_mut <- mutate(filter(housing,STATE %in% c("NY","CT","AL","CA")), 
                       region = ifelse(STATE %in% c("NY","CT","DE","ME","MD","MA","NH","MJ","PA","RI","VT"), "NEA", 
                                       "OTEHR"))
-
 p1 <- ggplot(housing_mut, aes(x= Date, y= homeValue))
-
-
 p1+geom_point(aes(color = region, shape = STATE))
+
+
+# statistics
+# histogram
+p2 <- ggplot(housing, aes(x= log(homeValue)))
+             
+p2 + geom_histogram(binwidth = 0.05)
