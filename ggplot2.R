@@ -45,7 +45,7 @@ ggplot(subset(housing, STATE %in% c("MA","TX")),
 
 # geom - points, lines, boxplot
 hp2001Q1 <- subset(housing, Date == "2001Q1")
-ggplot(hp2001Q1,
+p <- ggplot(hp2001Q1,
        aes(y= homeValue, x = Home.Price.Index)) +
   geom_point()
 
@@ -55,14 +55,13 @@ hp2001Q1$pred_price <- predict(HV_HPI)
 p1 <- ggplot(hp2001Q1, aes(x = Home.Price.Index, y = homeValue))
 
 # add regression line
-p1 + geom_point(aes(color = "red")) +
-  geom_line(aes(y = pred_price))
+p + geom_line(aes(y = pred_price))
 
 # add smooth line
 p1 + geom_point() + geom_smooth()
-
+p + geom_smooth()
 # use geom(smooth(method = "lm")) 
-p1 + geom_point() + geom_smooth(method = "lm")
+p + geom_smooth(method = "lm")
 
 # scatter plot but using text
 p1 + geom_text(aes(label = STATE), size = 3) + geom_line(aes(y=pred_price)) + geom_smooth()
