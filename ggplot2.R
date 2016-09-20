@@ -38,4 +38,12 @@ hp2001Q1$pred_price <- predict(HV_HPI)
 
 p1 <- ggplot(hp2001Q1, aes(x = Home.Price.Index, y = homeValue))
 
-p1 + geom_point(aes(color = "red"))
+# add regression line
+p1 + geom_point(aes(color = "red")) +
+  geom_line(aes(y = pred_price))
+
+# add smooth line
+p1 + geom_point() + geom_smooth()
+
+# scatter plot but using text
+p1 + geom_text(aes(label = STATE), size = 3) + geom_line(aes(y=pred_price)) + geom_smooth()
