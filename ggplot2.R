@@ -1,3 +1,8 @@
+library(stringr)
+library(ggplot2)
+library(dplyr)
+library(ggrepel)
+
 setwd("D:/Data")
 housing <- read.csv("landprice.csv", header = T)
 housing$homeValue <- str_sub(housing$Home.Value, 2, length(housing$Home.Value))
@@ -7,7 +12,6 @@ housing$homeValue <- as.numeric(gsub(",", "", housing$homeValue))
 hist(housing$homeValue)
 
 # ggplot2 - histogram
-library(ggplot2)
 ggplot(housing, aes(x = homeValue)) +
   geom_histogram()
 
@@ -50,21 +54,19 @@ p1 + geom_text(aes(label = STATE), size = 3) + geom_line(aes(y=pred_price)) + ge
 
 # use both dot and label - ggrepel
 install.packages("ggrepel")
-library(ggrepel)
 p1 + geom_point() +
   geom_text_repel(aes(label = STATE))
 
 # two dimentions plot
-library(dplyr)
 p1 <- ggplot(filter(housing, STATE %in% c("TX","NY")), aes(x = Date, y = homeValue))
 p1 + geom_point(aes(color = STATE))
 
 # dplyr - mutate() ifelse()
-housing_mut <- mutate(housing, 
+housing_mut <- mutate(filter(housing,STATE %in% c("NY","CT","AL","CA")), 
                       region = ifelse(STATE %in% c("NY","CT","DE","ME","MD","MA","NH","MJ","PA","RI","VT"), "NEA", 
                                       "OTEHR"))
 
 p1 <- ggplot(housing_mut, aes(x= Date, y= homeValue))
 
 
-p1+geom_point(aes(color = STATE, shape = region))
+p1+geom_point(aes(color = region, shape = STATE))
