@@ -3,8 +3,15 @@ library(ggplot2)
 library(dplyr)
 library(ggrepel)
 
-setwd("D:/Data")
-housing <- read.csv("landprice.csv", header = T)
+#setwd("D:/Data")
+#housing <- read.csv("landprice.csv", header = T)
+#http://datatoolkits.lincolninst.edu/subcenters/land-values/data/landdata-states-2016q1.xls
+
+# read from online source - xls file 
+install.packages("gdata")
+require(gdata)
+housing <- read.xls('http://datatoolkits.lincolninst.edu/subcenters/land-values/data/landdata-states-2016q1.xls')
+
 housing$homeValue <- str_sub(housing$Home.Value, 2, length(housing$Home.Value))
 housing$homeValue <- as.numeric(gsub(",", "", housing$homeValue))
 
