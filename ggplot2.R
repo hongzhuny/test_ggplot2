@@ -53,3 +53,18 @@ install.packages("ggrepel")
 library(ggrepel)
 p1 + geom_point() +
   geom_text_repel(aes(label = STATE))
+
+# two dimentions plot
+library(dplyr)
+p1 <- ggplot(filter(housing, STATE %in% c("TX","NY")), aes(x = Date, y = homeValue))
+p1 + geom_point(aes(color = STATE))
+
+# dplyr - mutate() ifelse()
+housing_mut <- mutate(housing, 
+                      region = ifelse(STATE %in% c("NY","CT","DE","ME","MD","MA","NH","MJ","PA","RI","VT"), "NEA", 
+                                      "OTEHR"))
+
+p1 <- ggplot(housing_mut, aes(x= Date, y= homeValue))
+
+
+p1+geom_point(aes(color = STATE, shape = region))
