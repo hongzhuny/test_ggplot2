@@ -1,3 +1,8 @@
+install.packages("ggplot2")
+install.packages("stringr")
+install.packages("dplyr")
+install.packages("ggrepel")
+
 library(stringr)
 library(ggplot2)
 library(dplyr)
