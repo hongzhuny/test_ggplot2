@@ -91,3 +91,19 @@ p2 + geom_histogram(binwidth = 0.05)
 # %>%
 housing %>% group_by(STATE) %>% summarise(Mean = mean(homeValue)) %>%
   ggplot(aes(x=STATE,y=Mean)) + geom_point()
+
+
+
+################### dplyr  tidyr ##########################
+#install.packages("tidyr")
+library(dplyr)
+library(tidyr)
+
+mydf <- c("1", "2","Food Drink", "Snack, Drink")
+dim(mydf) <- c(2,2)
+mydf <- data.frame(mydf)
+names(mydf) <- c("ID", "Item")
+
+mydf %>%
+  mutate(new_Col = strsplit(as.character(Item), " ")) %>%
+  unnest(new_Col)
