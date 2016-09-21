@@ -87,3 +87,7 @@ p1+geom_point(aes(color = region, shape = STATE))
 # histogram
 p2 <- ggplot(housing, aes(x= log(homeValue)))
 p2 + geom_histogram(binwidth = 0.05)
+
+# %>%
+housing %>% group_by(STATE) %>% summarise(Mean = mean(homeValue)) %>%
+  ggplot(aes(x=STATE,y=Mean)) + geom_point()
